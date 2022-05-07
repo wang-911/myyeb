@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxx.server.mapper.LogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="LogDO">
+        <id column="id" property="id" />
+        <result column="userId" property="userId" />
+        <result column="username" property="username" />
+        <result column="operation" property="operation" />
+        <result column="time" property="time" />
+        <result column="method" property="method" />
+        <result column="params" property="params" />
+        <result column="ip" property="ip" />
+        <result column="createOn" property="createOn" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, userId, username, operation, time, method,params,ip,createOn
+    </sql>
+
+    <!--获取所有日志（分页）-->
+    <select id="getLogsByPage" resultType="LogDO">
+        select * from sys_log
+        where
+        1=1
+        <if test="logDO.username != null and '' != logDO.username ">
+            AND username like concat('%',#{logDO.username},'%')
+        </if>
+        <if test="logDO.operation != null and '' != logDO.operation ">
+            AND operation like concat('%',#{logDO.operation},'%')
+        </if>
+        ORDER BY createOn DESC
+
+    </select>
+
+
+</mapper>

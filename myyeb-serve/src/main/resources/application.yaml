@@ -1,0 +1,36 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.12.81:3306/yeb-dev?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: aaa111
+  mail:
+    username: 1648192086@qq.com
+    password: fudkwztqcwhhchcj
+    host: smtp.qq.com
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  #配置mybatis数据返回类型别名
+  type-aliases-package: com.xxx.server.pojo
+  configuration:
+    # 自动驼峰命名
+    map-underscore-to-camel-case: false
+
+logging:
+  level:
+    com.xxx.server.mapper: debug
+
+jwt:
+  # Jwt存储的请求头
+  tokenHeader: Authorization
+  # Jwt加密秘钥
+  secret: yeb-secret
+  # Jwt 的超期限时间（60*60）*24
+  expiration: 604800
+  # Jwt负载中拿到开头
+  tokenHead: Bearer
+
+
